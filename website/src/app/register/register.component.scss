@@ -1,0 +1,128 @@
+.btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: 0.25em;
+    color: #000;
+    background: transparent url(../../assets/img/btn-close.svg) center/1em auto no-repeat;
+    border: 0;
+    border-radius: 0.375rem;
+    opacity: .5;
+}
+
+.countdownbg {
+    min-height: 35vh;
+    background-size: cover;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-image: url(../../assets/img/banner.jpg);
+    box-shadow: inset 0 0 0 2000px rgb(0 0 0 / 65%);
+}
+
+@media (max-width: 991px) {
+    .countdownbg {
+        min-height: 22vh;
+    }
+
+    .ticks {
+        font-size: x-large !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .img-fluid {
+        height: 250px;
+    }
+}
+
+.ticks {
+    font-size: xx-large;
+    font-weight: 700;
+}
+
+.timer {
+    height: fit-content;
+    margin: auto;
+}
+
+// Success Box
+.box-container{
+    width: 100%;
+     float: left;
+     padding: 15px;
+     background-color: #e3815c
+ }
+ .haif-more{
+     width: 100%;
+     float: left;
+    border: 19px solid #f8d1d6;
+ }
+ .person-details{
+     width: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     height: 150px;
+     background-color: #fceeee
+ }
+ .details-sec{
+     width: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     height: 150px;
+     background-color: rgba(255, 232, 160, 1);
+     position: relative;
+ }
+ .details-sec:after{
+     content: "";
+     position: absolute;
+     width: 0;
+     height: 0;
+     border-top: 15px solid transparent;
+     border-bottom: 15px solid transparent;
+     border-left: 15px solid #ffc200;
+     right: -3px;
+     bottom: -10px;
+     z-index: 10;
+     transform: rotate(45deg);
+ }
+ 
+ .person-details {
+    .person-name {
+        text-transform: capitalize;
+    }
+    .registered,.person-name {
+        font-weight: 700;
+    }
+ }
+ .person-details p{
+     margin: 0px;
+     text-transform: uppercase;
+     color: #000;
+ }
+ .details-sec .normal{
+     font-size: 14px;
+      color: #000;
+ }
+ .details-sec .normal.bold{
+     font-weight: 600;
+     font-size: 14px;
+ }
+ .details-sec .normal.last{
+     margin-bottom: 0px;
+ }
+
+ .full-width img {
+    width: -webkit-fill-available;
+ }
+
+ .person-name {
+    text-transform: capitalize;
+ }
+
+ .full-width {
+    border-bottom: 10px solid #e3815c;
+ }

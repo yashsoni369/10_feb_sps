@@ -1,0 +1,376 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand">
+        <img src="../../assets/img/sym_logo.png" alt="Logo" width="30" height="30"
+            class="d-inline-block align-text-top ms-2">
+        Suhradam Yuvak Mandal
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <!-- <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" routerLink="/home" routerLinkActive="active">
+                    Home
+                </a>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" routerLink="/register" routerLinkActive="active">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" routerLink="/admin" routerLinkActive="active">Admin</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<section class="h-100" style="background: linear-gradient(260deg, rgba(248,154,80,1) 0%, rgba(82,188,214,1) 50%, rgba(240,79,129,1) 100%);">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card card my-4">
+                    <div class="card-body countdownbg d-flex">
+                        <div class="timer text-white" *ngIf="(timeLeft$ | async) as t; else sorry">
+                            <h4 class="text-center"> Countdown to Parivar Shibir 2023 </h4>
+                            <div class="text-center ticks">
+                                <span class="ticks" id="days"> {{t.daysToDday}} </span>Days :
+                                <span class="ticks" id="hours"> {{t.hoursToDday}} </span>Hrs :
+                                <span class="ticks" id="minutes"> {{t.minutesToDday}} </span>Min :
+                                <span class="ticks" id="seconds"> {{t.secondsToDday}} </span>s
+                            </div>
+                        </div>
+
+                        <ng-template #sorry>
+                            The Time has COME! Mahotsav is LIVE!
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0">
+                        <div class="align-self-md-center col-xl-6 d-flex d-xl-block m-auto w-auto">
+                            <img src="../../assets/img/sym_logo.png" alt="Sample photo" class="img-fluid"
+                                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card-body p-md-5 text-black">
+                                <form [formGroup]="formModel" #f="ngForm" (submit)="onSubmit()">
+                                    <h3 class="text-uppercase">Suhradam Parivar Shibir</h3>
+                                    <h6 class="text-uppercase">10th February 2023, Ghatkopar</h6>
+                                    <hr>
+                                    <p class="mb-3">Please enter your <b>Mobile No first</b>, If you attended Sabha, we
+                                        will fetch your data
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="form3Example1n">Mobile No</label>
+                                                <ng-autocomplete #mobAutoSelector autocomplete="none"
+                                                    [data]="autoCompleteMobileList"
+                                                    [searchKeyword]="searchMobileKeyword" placeholder="Enter Mobile No"
+                                                    [historyListMaxNumber]="0" (inputCleared)="onMobileCleared()"
+                                                    (selected)='onMobileSelected($event)' maxlength="10"
+                                                    (inputChanged)='onMobileSearch($event)'
+                                                    [itemTemplate]="itemTemplate" [minQueryLength]="3"
+                                                    [debounceTime]="800">
+                                                </ng-autocomplete>
+                                                <!-- <input type="text" id="form3Example1n" id="phone"
+                                                    formControlName="phone" placeholder="Enter your Phone No."
+                                                    class="form-control" /> -->
+                                                <div class="text-danger"
+                                                    *ngIf="phone.invalid && (phone.dirty || phone.touched  || f.submitted)">
+                                                    <div *ngIf="phone.errors.required">
+                                                        Please Enter your Phone No.
+                                                    </div>
+                                                    <div *ngIf="phone.errors.minlength || phone.errors.maxlength">
+                                                        Phone number should be of 10 digit
+                                                    </div>
+                                                    <div *ngIf="phone.errors.pattern">
+                                                        Phone number is not Valid
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="form3Example1m">First Name</label>
+                                                <input type="text" id="form3Example1m" class="form-control"
+                                                    id="firstName" formControlName="firstName"
+                                                    placeholder="Enter your first name" />
+                                                <div class="text-danger"
+                                                    *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || f.submitted)">
+                                                    <div *ngIf="firstName.errors.required">
+                                                        Please Enter your first name.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="form3Example1m">Middle Name</label>
+                                                <input type="text" id="form3Example1m" class="form-control" id="name"
+                                                    formControlName="middleName" placeholder="Enter your middle name" />
+                                                <div class="text-danger"
+                                                    *ngIf="middleName.invalid && (middleName.dirty || middleName.touched  || f.submitted)">
+                                                    <div *ngIf="middleName.errors.required">
+                                                        Please Enter your middle name.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="form3Example1m">Last Name</label>
+                                                <input type="text" id="form3Example1m" class="form-control" id="name"
+                                                    formControlName="lastName" placeholder="Enter your last name" />
+                                                <div class="text-danger"
+                                                    *ngIf="lastName.invalid && (lastName.dirty || lastName.touched  || f.submitted)">
+                                                    <div *ngIf="lastName.errors.required">
+                                                        Please Enter your last name.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 mb-4">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="gender">Gender</label>
+
+                                                <select (change)="onGenderChange($event)" class="form-select"
+                                                    id="gender" formControlName="gender">
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 mb-4">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="dob">Date of Birth</label>
+                                                <input type="date" class="form-control" formControlName="dob" />
+                                                <div class="text-danger"
+                                                    *ngIf="dob.invalid && (dob.dirty || dob.touched  || f.submitted)">
+                                                    <div *ngIf="dob.errors.required">
+                                                        Please Select your DOB.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="isNew.value == true" class="col-md-6 mb-4">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="form3Example1m">Reference Name</label>
+                                                <ng-autocomplete #refAutoSelector [data]="autoCompleteNameList"
+                                                    [searchKeyword]="searchNameKeyword"
+                                                    placeholder="Reference Name who invited you"
+                                                    (selected)='onReferenceSelected($event)'
+                                                    (inputCleared)="onReferenceCleared()"
+                                                    (inputChanged)='onNameSearch($event)' [itemTemplate]="refTemplate"
+                                                    [notFoundTemplate]="notFoundTemplate" [minQueryLength]="4"
+                                                    [debounceTime]="800">
+                                                </ng-autocomplete>
+                                                <div class="text-danger"
+                                                    *ngIf="f.submitted && isNew.value == true && reference.value == ''">
+                                                    Please Enter Reference Name.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 mb-4">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="form3Example1m">Sabha</label>
+                                                <select type="text" id="form3Example1m" class="form-select" id="sabha"
+                                                    formControlName="sabha">
+                                                    <option [value]="null">Select Sabha Area</option>
+                                                    <option *ngFor="let sabha of sabhaList" [value]="sabha">{{sabha}}
+                                                    </option>
+                                                </select>
+                                                <div class="text-danger"
+                                                    *ngIf="sabha.invalid && (sabha.dirty || sabha.touched  || f.submitted)">
+                                                    <div *ngIf="sabha.errors.required">
+                                                        Please Select your Sabha.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row"> -->
+                                    <!-- <div *ngIf="isNew.value == true" class="col-md-6 mb-4">
+                                            <div class="form-outline">
+                                                <label class="form-label" for="form3Example1m">Reference Name</label>
+                                                <ng-autocomplete #refAutoSelector [data]="autoCompleteNameList"
+                                                    [searchKeyword]="searchNameKeyword"
+                                                    placeholder="Enter Reference Name"
+                                                    (selected)='onReferenceSelected($event)'
+                                                    (inputCleared)="onReferenceCleared()"
+                                                    (inputChanged)='onNameSearch($event)' [itemTemplate]="refTemplate"
+                                                    [notFoundTemplate]="notFoundTemplate" [minQueryLength]="4"
+                                                    [debounceTime]="800">
+                                                </ng-autocomplete>
+                                                <div class="text-danger"
+                                                    *ngIf="f.submitted && isNew.value == true && reference.value == ''">
+                                                    Please Enter Reference Name.
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+
+                                    <div class="d-flex justify-content-end pt-3">
+                                        <button type="button" class="btn btn-light btn-lg me-2" (click)="reset()">Reset
+                                            all</button>
+                                        <button type="submit" class="btn btn-warning btn-lg">Submit form</button>
+                                    </div>
+                                </form>
+                                <div class="alert alert-info mt-2" role="alert">
+                                    For more details, contact us at: <a href="tel:+917208899993">7208899993 !</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- HPYM CODE -->
+<div class="modal fade" id="autoCompleteModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+    aria-labelledby="autoCompleteModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="autoCompleteModal">Initial Details</h5>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body">
+                <p>Please provide your <b>Mobile Number OR Name</b> if you are already Suharadam Member (Have attended
+                    any sabha atleast one time)</p>
+                <form>
+                    <div class="mb-3">
+                        <label for="mobile-no" class="col-form-label">Mobile No:</label>
+                        <ng-autocomplete [data]="autoCompleteMobileList" [searchKeyword]="searchMobileKeyword"
+                            placeholder="Enter Mobile No" (selected)='onMobileSelected($event)'
+                            (inputChanged)='onMobileSearch($event)' [itemTemplate]="itemTemplate"
+                            [notFoundTemplate]="notFoundTemplate" [minQueryLength]="3" [debounceTime]="800">
+                        </ng-autocomplete>
+                        <!-- <input type="text" class="form-control" id="mobile-no"> -->
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Name:</label>
+                        <!-- <ng-autocomplete [data]="autoCompleteNameList" [searchKeyword]="searchNameKeyword"
+                            placeholder="Enter Full Name" (selected)='onNameSelected($event)'
+                            (inputChanged)='onNameSearch($event)' [itemTemplate]="nameTemplate"
+                            [notFoundTemplate]="notFoundTemplate" [minQueryLength]="4" [debounceTime]="800">
+                        </ng-autocomplete> -->
+                    </div>
+                </form>
+                <hr>
+                <p> If you didn't find your details above, please click on <b>New Member</b> below</p>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onNewMemberClick()"
+                    aria-label="Close">New
+                    Member</button>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #itemTemplate let-item>
+    <a [innerHTML]="item.Mobile + ' - ' + item['Full Name']"></a>
+</ng-template>
+
+<ng-template #nameTemplate let-name>
+    <a [innerHTML]="name['Full Name'] + ' - ' +  name.Mobile"></a>
+</ng-template>
+
+<ng-template #refTemplate let-ref>
+    <a [innerHTML]="ref['Full Name'] + ' - ' + ref['Sabha']"></a>
+</ng-template>
+<ng-template #notFoundTemplate let-notFound>
+    <div>New Member</div>
+</ng-template>
+
+<div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false"
+    aria-labelledby="successModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="autoCompleteModal">Registeration Successfully Done</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="reset()"></button> -->
+            </div>
+            <div class="modal-body">
+                <div class="box-container" id="box-container">
+                    <div class="full-width">
+                        <img src="../../assets/img/banner_success3.png" class="img-responsive">
+                    </div>
+                    <div class="haif-more">
+                        <div class="person-details" *ngIf="successData && successData['Sabha']">
+                            <!-- 26 -->
+                            <h3 class="person-name mb-1" style="color: #da8767;" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length <= 26">{{ (successData['First Name'] + ' ' + successData['Last Name'])}}</h3> 
+                            <h3 class="person-name mb-1" style="color: #da8767;" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length > 26">{{ (successData['First Name'] + ' ' + successData['Last Name'][0])}}</h3> 
+                            <p style="color: #d08373;">{{successData['Sabha'].split('(')[0]}}</p>
+                            <h5 class="registered mt-3" style="color: #da8767;">I HAVE REGISTERED</h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="box-container" id="box-container">
+                    <div class="full-width">
+                        <img src="../../assets/img/banner_success2.jpg" class="img-responsive">
+                    </div>
+                    <div class="haif-more">
+                        <div class="person-details" *ngIf="successData && successData['Sabha']">
+                            <h3 class="person-name" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length <= 14">{{ (successData['First Name'] + ' ' + successData['Last Name'])}}</h3>
+                            <h6 class="person-name" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length > 14 && (successData['First Name'] + ' ' + successData['Last Name']).length <= 20">{{ (successData['First Name'] + ' ' + successData['Last Name'])}}</h6>
+                            <h6 class="person-name" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length > 20">{{ (successData['First Name'] + ' ' + successData['Last Name'][0])}}</h6>
+                            <p>{{successData['Sabha'].split('(')[0]}}</p>
+                        </div>
+                    </div>
+                    <div class="half-less">
+                        <div class="details-sec">
+                            <p class="normal mb-0 bold">8th January, 2023</p>
+                            <p class="normal text-center">Koli Bhartana - Surat</p>
+                            <p class="normal bold">I HAVE REGISTERED </p>
+                        </div>
+
+                    </div>
+                </div> -->
+                <!-- <h5 class="text-center">Jay Swaminarayan Das na das</h5> -->
+                <!-- <h5 class="text-center">Thank you for registering.</h5> -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-block btn-lg btn-outline-info" (click)="captureScreenshot()">
+                    <i class="fa fa-camera"></i>
+                    Take Screenshot</button>
+                <!-- <a href="{{'whatsapp://send?phone=91'+referenceDetails['Mobile']+'&text=Hi, '+referenceDetails['Full Name']+' I have registered for HariPrabodham Yuva Mohatsav! Jay Swaminarayan Das na Das?'}}"
+                    *ngIf="isNew.value == true" class="btn btn-block btn-lg btn-outline-success">
+                    <i class="fa fa-whatsapp"></i>
+                    Send Message</a> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="errorModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+    aria-labelledby="errorModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="autoCompleteModal">Registeration Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>{{errorMsg}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-bs-dismiss="modal" aria-label="Close"
+                    class="btn btn-block btn-lg btn-outline-info">
+                    Close</button>
+            </div>
+        </div>
+    </div>
+</div>

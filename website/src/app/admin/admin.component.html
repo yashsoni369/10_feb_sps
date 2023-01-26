@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" [routerLink]="['/']">
+        <img src="../../assets/img/sym_logo.png" alt="Logo" width="30" height="30"
+            class="d-inline-block align-text-top ms-2">
+        Suhradam Yuvak Mandal
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" routerLink="registerations" routerLinkActive="active">Registerations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<router-outlet></router-outlet>

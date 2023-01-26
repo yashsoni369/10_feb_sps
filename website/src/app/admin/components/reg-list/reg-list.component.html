@@ -1,0 +1,110 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<div class="mt-3 row w-100">
+    <div class="col-12">
+
+        <h5>Registerations</h5>
+        <div class="card">
+            <div class="card-body" style="width: 100vw;overflow: auto;">
+                <button class="btn btn-outline-success mb-3" (click)="exportexcel()">Export Excel</button>
+                <input type="text" name="search" id="" class="form-control"
+                    style="float: right;width: 30%;float: right;" placeholder="Search Member"
+                    (keyup)="searchMember($event)">
+                <table class="table table-bordered table-striped table-hover table-responsive" id="tableName"
+                    style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Action</th>
+                            <th>Full Name</th>
+                            <th>Mobile No</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Ref Name</th>
+                            <th>FollowUp</th>
+                            <th>Sabha</th>
+                            <th>New</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="displayList?.length > 0";else #nolistFound>
+                            <tr *ngFor="let m of displayList;let i = index">
+                                <td>{{i+1}}</td>
+                                <td></td>
+                                <td>{{m['First Name'] + ' ' + m['Middle Name'] + ' ' + m['Last
+                                    Name']}}</td>
+                                <td class="mobile_no">{{m['Mobile']}}</td>
+                                <td>{{calculateAge(m['Birth Date'])}}</td>
+                                <td>{{m['Gender']}}</td>
+                                <td>{{m['Ref Name'] ? m['Ref Name'] : 'NONE'}}</td>
+                                <td>{{m['FollowUp Name'] ? m['FollowUp Name'] : 'NONE'}}</td>
+                                <td>{{m['Sabha']}}</td>
+                                <td>{{m['isNew'] == true ? 'Yes' : 'No'}}</td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #nolistFound>
+                            <tr>
+                                <td colspan="10">
+No Data Found
+                                </td>
+                            </tr>
+                        </ng-template>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmModal" data-bs-backdrop="static" data-bs-keyboard="false"
+    aria-labelledby="confirmModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="autoCompleteModal">Delete Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure, you want to un-register {{toDeleteData?.firstName}} {{toDeleteData?.mobileNo}} ? <br>
+                <b>If this is a new member, his details will be removed !</b>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-info">
+                    Close</button>
+                <button type="button" (click)="unRegisterApiCall()" class="btn btn-danger">
+                    Remove</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+    aria-labelledby="loginModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="autoCompleteModal">Enter your credentials</h5>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="loginForm">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Email Id</label>
+                        <input type="text" formControlName="username" class="form-control" autocomplete="off"
+                            id="username" placeholder="Enter your mail id">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" formControlName="password" class="form-control" autocomplete="off"
+                            id="password" placeholder="Enter your password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" [disabled]="loginForm.invalid" (click)="onLogin()">
+                    Login</button>
+            </div>
+        </div>
+    </div>
+</div>
