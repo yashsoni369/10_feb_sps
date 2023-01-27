@@ -10,6 +10,8 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
+import { JwPaginationModule } from 'jw-angular-pagination';
+
 @NgModule({
   declarations: [
     AdminComponent,
@@ -23,7 +25,8 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    JwPaginationModule
   ]
 })
 export class AdminModule { }

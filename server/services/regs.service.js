@@ -55,7 +55,7 @@ regsService.register = async (req, res) => {
     try {
         const id = await alreadyRegistered(req.body.Mobile);
         if (id == 0) {
-            if(!req.body.isNew) {
+            if (!req.body.isNew) {
                 var samparkDetails = await samparkSchema.findOne({ Mobile: req.body.Mobile }, { "Ref Name": 1, "FollowUp Name": 1 }).lean();
                 req.body['Ref Name'] = samparkDetails['Ref Name']
                 req.body['FollowUp Name'] = samparkDetails['FollowUp Name']
@@ -111,7 +111,12 @@ const alreadyRegistered = async (mobileNo) => {
 
 regsService.getAll = async (req, res) => {
     try {
-        var regs = await registerationModel.find({}).sort({ createdAt: 1 });
+        var regs = await registerationModel.find({
+            $or: [
+                { isDeleted: { $exists: false } },
+                { isDeleted: false }
+            ]
+        }).sort({ createdAt: 1 });
         var totalRecords = await registerationModel.countDocuments({});
         return { statusCode: 200, message: 'Registerations List', data: { regs, totalRecords }, res }
     } catch (e) {
@@ -133,19 +138,10 @@ regsService.getSabhaList = async (req, res) => {
 
 regsService.deRegisterMember = async (req, res) => {
     try {
-        var samparkId;
-        if (req.body.isNew && req.body.isNew == 'Yes') {
-            var sampark = await samparkSchema.findOne({ 'Mobile': req.body.mobileNo, 'In Groups': 'HPYM2023_NEW' });
-            samparkId = sampark.id || null;
-            await samparkSchema.deleteOne({ _id: mongoose.Types.ObjectId(samparkId) });
-        }
-        else {
-            var sampark = await samparkSchema.findOne({ 'Mobile': req.body.mobileNo });
-            samparkId = sampark.id || null;
-        }
-        var rec = await registerationModel.deleteOne({ samparkId: mongoose.Types.ObjectId(samparkId) })
+
+        var rec = await registerationModel.updateOne({ _id: mongoose.Types.ObjectId(req.body._id) }, { $set: { isDeleted: true } })
         // var totalRecords = await samparkSchema.distinct('Sabha', { 'Gender': req.query.gender });
-        return { statusCode: 200, message: 'Sabha list', data: rec, res }
+        return { statusCode: 200, message: 'Member Deleted', data: rec, res }
     } catch (e) {
         return { statusCode: 500, message: 'Internal Server Error', data: '', res, error: e }
     }

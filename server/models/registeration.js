@@ -11,6 +11,8 @@ var registeration = new mongoose.Schema({
     'Sabha': { type: String },
     'Ref Name': { type: String },
     'FollowUp Name': { type: String },
+    'updatedBy': { type: String },
+    'isDeleted': { type: Boolean, default: false },
     isNew: Boolean
 }, { timestamps: true });
 

@@ -31,6 +31,7 @@
     "font-awesome": "^4.2.0",
     "jquery": "^3.6.0",
     "jszip": "^3.10.1",
+    "jw-angular-pagination": "^1.2.0",
     "ngx-capture": "^0.12.2",
     "pdfmake": "^0.2.6",
     "rxjs": "~6.6.0",

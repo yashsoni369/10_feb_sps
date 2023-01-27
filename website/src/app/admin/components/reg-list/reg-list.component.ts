@@ -113,10 +113,10 @@ export class RegListComponent implements OnInit {
     )
   }
   confirmModal;
-  UnRegisterMember(mobileNo, isNew, firstName) {
+  deleteMember(id) {
     this.confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'), {});
     this.confirmModal.show();
-    this.toDeleteData = { mobileNo, isNew, firstName };
+    this.toDeleteData = this.paginatedItems.find(m=>m._id == id);
     // var cm = new bootstrap.Modal(document.getElementById('confirmModal'), {});
     // cm.show();
 
@@ -124,9 +124,9 @@ export class RegListComponent implements OnInit {
 
   unRegisterApiCall() {
     this.loading = true;
-    const { mobileNo, isNew } = this.toDeleteData;
-    this.service.deRegisterMember({ mobileNo, isNew }).subscribe(res => {
-      $("#tableName").DataTable().destroy();
+    const { mobileNo,_id } = this.toDeleteData;
+    this.service.deRegisterMember({ mobileNo, _id }).subscribe(res => {
+      // $("#tableName").DataTable().destroy();
       this.getAllRegs();
       this.toDeleteData = null;
       // this.loading = false
@@ -158,6 +158,12 @@ export class RegListComponent implements OnInit {
         this.loginForm.reset();
       }
     }
+  }
+  paginatedItems;
+
+  onChangePage(e) {
+    this.paginatedItems = e;
+    console.log(e);
   }
 
   calculateAge(birthday) { // birthday is a date

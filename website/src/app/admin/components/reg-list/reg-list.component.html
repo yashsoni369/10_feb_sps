@@ -4,7 +4,7 @@
 
         <h5>Registerations</h5>
         <div class="card">
-            <div class="card-body" style="width: 100vw;overflow: auto;">
+            <div class="card-body" style="overflow: auto;">
                 <button class="btn btn-outline-success mb-3" (click)="exportexcel()">Export Excel</button>
                 <input type="text" name="search" id="" class="form-control"
                     style="float: right;width: 30%;float: right;" placeholder="Search Member"
@@ -26,10 +26,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngIf="displayList?.length > 0";else #nolistFound>
-                            <tr *ngFor="let m of displayList;let i = index">
+                        <ng-container *ngIf="displayList?.length > 0" ;else #nolistFound>
+                            <tr *ngFor="let m of paginatedItems;let i = index">
                                 <td>{{i+1}}</td>
-                                <td></td>
+                                <td><button *ngIf="loginForm.value.username == 'vaibhav@hpym.com'" type="button"
+                                        class="btn btn-danger btn-sm me-1"><i class="fa fa-trash" (click)="deleteMember(m._id)"></i></button>
+                                    <button type="button" (click)="editMember(m._id)"
+                                        class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
+                                </td>
                                 <td>{{m['First Name'] + ' ' + m['Middle Name'] + ' ' + m['Last
                                     Name']}}</td>
                                 <td class="mobile_no">{{m['Mobile']}}</td>
@@ -44,13 +48,14 @@
                         <ng-template #nolistFound>
                             <tr>
                                 <td colspan="10">
-No Data Found
+                                    No Data Found
                                 </td>
                             </tr>
                         </ng-template>
-                        
+
                     </tbody>
                 </table>
+                <jw-pagination [items]="displayList" (changePage)="onChangePage($event)"></jw-pagination>
             </div>
         </div>
     </div>
@@ -64,9 +69,9 @@ No Data Found
                 <h5 class="modal-title" id="autoCompleteModal">Delete Confirmation</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                Are you sure, you want to un-register {{toDeleteData?.firstName}} {{toDeleteData?.mobileNo}} ? <br>
-                <b>If this is a new member, his details will be removed !</b>
+            <div class="modal-body" *ngIf="toDeleteData && toDeleteData.Mobile">
+                Are you sure, you want to un-register <br>
+                <strong>{{toDeleteData['Full Name']}} - {{toDeleteData['Mobile']}}</strong>
             </div>
             <div class="modal-footer">
                 <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-info">

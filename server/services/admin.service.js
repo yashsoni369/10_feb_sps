@@ -9,6 +9,21 @@ adminService.regsByMandal = async (req, res) => {
   try {
     var dash = await registerationModel.aggregate([
       {
+        $match:
+          {
+            $or: [
+              {
+                isDeleted: {
+                  $exists: false,
+                },
+              },
+              {
+                isDeleted: false,
+              },
+            ],
+          },
+      },
+      {
         $project: {
           Sabha: 1,
           isNew: 1,
