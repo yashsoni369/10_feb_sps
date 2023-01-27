@@ -317,13 +317,12 @@ export class RegisterComponent implements OnInit {
   }
 
   captureScreenshot() {
-    this.captureService.getImage((document.getElementById('box-container') as HTMLElement), true)
+    this.captureService.getImage((document.getElementById('ssBanner') as HTMLElement), true)
       .pipe(
         tap((img: any) => {
-          console.log(img);
           var a = document.createElement("a"); //Create <a>
           a.href = img; //Image Base64 Goes here
-          a.download = "HPYM_2023_" + document.getElementsByClassName('person-name')[0].innerHTML + '.jpg'; //File name Here
+          a.download = "Darshan_Parv_2023_" + document.getElementsByClassName('person-name')[0].innerHTML + '.jpg'; //File name Here
           a.click(); //Downloaded file
           this.reset();
 

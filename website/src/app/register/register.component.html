@@ -32,7 +32,7 @@
                 <div class="card card my-4">
                     <div class="card-body countdownbg d-flex">
                         <div class="timer text-white" *ngIf="(timeLeft$ | async) as t; else sorry">
-                            <h4 class="text-center"> Countdown to Parivar Shibir 2023 </h4>
+                            <h4 class="text-center"> Countdown to Darshan Parv 2023 </h4>
                             <div class="text-center ticks">
                                 <span class="ticks" id="days"> {{t.daysToDday}} </span>Days :
                                 <span class="ticks" id="hours"> {{t.hoursToDday}} </span>Hrs :
@@ -57,7 +57,7 @@
                         <div class="col-xl-6">
                             <div class="card-body p-md-5 text-black">
                                 <form [formGroup]="formModel" #f="ngForm" (submit)="onSubmit()">
-                                    <h3 class="text-uppercase">Suhradam Parivar Shibir</h3>
+                                    <h3 class="text-uppercase">Guruhari Darshan Parv</h3>
                                     <h6 class="text-uppercase">10th February 2023, Ghatkopar</h6>
                                     <hr>
                                     <p class="mb-3">Please enter your <b>Mobile No first</b>, If you attended Sabha, we
@@ -303,44 +303,14 @@
                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                         (click)="reset()"></button> -->
             </div>
-            <div class="modal-body">
-                <div class="box-container" id="box-container">
-                    <div class="full-width">
-                        <img src="../../assets/img/banner_success3.png" class="img-responsive">
-                    </div>
-                    <div class="haif-more">
-                        <div class="person-details" *ngIf="successData && successData['Sabha']">
-                            <!-- 26 -->
-                            <h3 class="person-name mb-1" style="color: #da8767;" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length <= 26">{{ (successData['First Name'] + ' ' + successData['Last Name'])}}</h3> 
-                            <h3 class="person-name mb-1" style="color: #da8767;" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length > 26">{{ (successData['First Name'] + ' ' + successData['Last Name'][0])}}</h3> 
-                            <p style="color: #d08373;">{{successData['Sabha'].split('(')[0]}}</p>
-                            <h5 class="registered mt-3" style="color: #da8767;">I HAVE REGISTERED</h5>
-                        </div>
-                    </div>
+            <div class="modal-body" id="ssBanner">
+                <img src="../../assets/img/success_bg.png" />
+                <div *ngIf="successData && successData['Sabha']" class="member-details">
+                    <h5 class="person-name" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length <= 14">{{ (successData['First Name'] + ' ' + successData['Last Name'])}} - {{successData['Sabha'].split('(')[0]}}</h5>
+                    <h5 class="person-name" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length > 14 && (successData['First Name'] + ' ' + successData['Last Name']).length <= 20">{{ (successData['First Name'] + ' ' + successData['Last Name'])}} - {{successData['Sabha'].split('(')[0]}}</h5>
+                    <h5 class="person-name" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length > 20">{{ (successData['First Name'] + ' ' + successData['Last Name'][0])}} - {{successData['Sabha'].split('(')[0]}}</h5>
+                    <h6>I am Attending</h6>
                 </div>
-                <!-- <div class="box-container" id="box-container">
-                    <div class="full-width">
-                        <img src="../../assets/img/banner_success2.jpg" class="img-responsive">
-                    </div>
-                    <div class="haif-more">
-                        <div class="person-details" *ngIf="successData && successData['Sabha']">
-                            <h3 class="person-name" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length <= 14">{{ (successData['First Name'] + ' ' + successData['Last Name'])}}</h3>
-                            <h6 class="person-name" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length > 14 && (successData['First Name'] + ' ' + successData['Last Name']).length <= 20">{{ (successData['First Name'] + ' ' + successData['Last Name'])}}</h6>
-                            <h6 class="person-name" *ngIf="(successData['First Name'] + ' ' + successData['Last Name']).length > 20">{{ (successData['First Name'] + ' ' + successData['Last Name'][0])}}</h6>
-                            <p>{{successData['Sabha'].split('(')[0]}}</p>
-                        </div>
-                    </div>
-                    <div class="half-less">
-                        <div class="details-sec">
-                            <p class="normal mb-0 bold">8th January, 2023</p>
-                            <p class="normal text-center">Koli Bhartana - Surat</p>
-                            <p class="normal bold">I HAVE REGISTERED </p>
-                        </div>
-
-                    </div>
-                </div> -->
-                <!-- <h5 class="text-center">Jay Swaminarayan Das na das</h5> -->
-                <!-- <h5 class="text-center">Thank you for registering.</h5> -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-block btn-lg btn-outline-info" (click)="captureScreenshot()">
