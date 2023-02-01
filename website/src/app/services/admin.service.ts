@@ -11,8 +11,8 @@ export class AdminService {
     this.url = environment.applicationUrl;
   }
 
-  getAll() {
-    return this.http.get(this.url + '/regs');
+  getAll(isRegistered) {
+    return this.http.get(this.url + '/regs?isRegistered='+ isRegistered);
   }
 
   deRegisterMember(body) {

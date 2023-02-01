@@ -20,6 +20,7 @@ export class RegListComponent implements OnInit {
   toDeleteData;
   displayList;
   searchVal = "";
+  getRegistered = true;
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -30,18 +31,18 @@ export class RegListComponent implements OnInit {
     this.loginModal.show();
     // this.getAllRegs();
 
-
+    
     // return table;
   }
 
   searchMember(e) {
-    if(e.target.value == '') {
+    if (e.target.value == '') {
       this.displayList = this.source;
     }
-    if(e.target.value.length >= 3) {
+    if (e.target.value.length >= 3) {
       var searchText = e.target.value
       this.displayList = this.source.filter(s =>
-        s['Full Name']?.toLowerCase().includes(searchText.toLowerCase()) || 
+        s['Full Name']?.toLowerCase().includes(searchText.toLowerCase()) ||
         s['Gender']?.toLowerCase().includes(searchText.toLowerCase()) ||
         s['Mobile']?.toLowerCase().includes(searchText.toLowerCase()) ||
         s['Ref Name']?.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -49,36 +50,29 @@ export class RegListComponent implements OnInit {
         s['Sabha']?.toLowerCase().includes(searchText.toLowerCase())
       );
       console.log(this.displayList);
-      
+
     }
-    
+
   }
 
   source;
 
   exportexcel() {
-    var newarr = [];
-    var srno = 1;
-    // this.source.forEach(s => {
-    //   // var copy = Object.assign({}, s, s.sampark); // we can add as many object as we need.
-    //   // s = copy;
-    //   let merged = { ...s, ...s['sampark'] };
-    //   delete merged['sampark'];
-    //   merged['Sr no'] = srno;
-    //   srno++;
-    //   merged["Age"] = this.calculateAge(merged['Birth Date']);
-    //   merged["isNew"] = merged["isNew"] == true ? "Yes" : "No";
-    //   merged["sslRegistered"] = merged["sslRegistered"] == 1 ? "Yes" : "No";
-    //   merged['Full Name'] = merged['First Name'] + " " + merged['Middle Name'] + " " + merged["Last Name"];
-    //   delete merged['_id']
-    //   newarr.push(merged);
-    // });
-    this.excelService.exportAsExcelFile(this.displayList, "Parivar_Shibir_2023")
+    var name = "Parivar_Shibir_registered_2023";
+    if(this.getRegistered == false) {
+      name = "Parivar_Shibir_unregistered_2023";
+    }
+    this.excelService.exportAsExcelFile(this.displayList, name)
+  }
+
+  onViewTypeChanged(e) {
+    this.getRegistered = !this.getRegistered;
+    this.getAllRegs();
   }
 
   getAllRegs() {
     this.loading = true;
-    this.service.getAll().subscribe(
+    this.service.getAll(this.getRegistered).subscribe(
       (res: any) => {
         if (this.loginForm.get('username').value == 'vaibhav@hpym.com') {
           this.source = res.data.regs
@@ -116,7 +110,7 @@ export class RegListComponent implements OnInit {
   deleteMember(id) {
     this.confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'), {});
     this.confirmModal.show();
-    this.toDeleteData = this.paginatedItems.find(m=>m._id == id);
+    this.toDeleteData = this.paginatedItems.find(m => m._id == id);
     // var cm = new bootstrap.Modal(document.getElementById('confirmModal'), {});
     // cm.show();
 
@@ -124,8 +118,8 @@ export class RegListComponent implements OnInit {
 
   unRegisterApiCall() {
     this.loading = true;
-    const { mobileNo,_id } = this.toDeleteData;
-    this.service.deRegisterMember({ mobileNo, _id }).subscribe(res => {
+    const { mobileNo, _id } = this.toDeleteData;
+    this.service.deRegisterMember({ mobileNo, _id, updatedBy: this.loginForm.value.username }).subscribe(res => {
       // $("#tableName").DataTable().destroy();
       this.getAllRegs();
       this.toDeleteData = null;

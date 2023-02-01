@@ -111,13 +111,54 @@ const alreadyRegistered = async (mobileNo) => {
 
 regsService.getAll = async (req, res) => {
     try {
-        var regs = await registerationModel.find({
-            $or: [
-                { isDeleted: { $exists: false } },
-                { isDeleted: false }
-            ]
-        }).sort({ createdAt: 1 });
-        var totalRecords = await registerationModel.countDocuments({});
+        var regs = [];
+        var totalRecords = 0;
+        if (req.query.isRegistered === 'true') {
+            regs = await registerationModel.find({
+                $or: [
+                    { isDeleted: { $exists: false } },
+                    { isDeleted: false }
+                ]
+            }).sort({ createdAt: 1 });
+
+            totalRecords = await registerationModel.countDocuments({});
+
+        }
+        else {
+            regs = await samparkSchema.aggregate([
+                {
+                    $lookup:
+                    {
+                        from: "sps_2023_registerations",
+                        localField: "Mobile",
+                        foreignField: "Mobile",
+                        as: "registeration",
+                    },
+                },
+                {
+                    $match:
+                    {
+                        registeration: {
+                            $eq: [],
+                        },
+                        "Attending Sabha":"Yes"
+                    },
+                },
+                {
+                    $project:
+                    {
+                        "Full Name": 1,
+                        Mobile: 1,
+                        Sabha: 1,
+                        "Birth Date": 1,
+                        Gender: 1,
+                        "Ref Name": 1,
+                        "FollowUp Name": 1,
+                    },
+                },
+            ])
+            totalRecords = regs.length;
+        }
         return { statusCode: 200, message: 'Registerations List', data: { regs, totalRecords }, res }
     } catch (e) {
         return { statusCode: 500, message: 'Internal Server Error', data: '', res, error: e }
@@ -139,8 +180,11 @@ regsService.getSabhaList = async (req, res) => {
 regsService.deRegisterMember = async (req, res) => {
     try {
 
-        var rec = await registerationModel.updateOne({ _id: mongoose.Types.ObjectId(req.body._id) }, { $set: { isDeleted: true } })
-        // var totalRecords = await samparkSchema.distinct('Sabha', { 'Gender': req.query.gender });
+        // soft delete
+        // var rec = await registerationModel.updateOne({ _id: mongoose.Types.ObjectId(req.body._id) }, { $set: { isDeleted: true, updatedBy: req.body.updatedBy } })
+
+        // hard delete
+        var rec = await registerationModel.deleteOne({ _id: mongoose.Types.ObjectId(req.body._id) });
         return { statusCode: 200, message: 'Member Deleted', data: rec, res }
     } catch (e) {
         return { statusCode: 500, message: 'Internal Server Error', data: '', res, error: e }

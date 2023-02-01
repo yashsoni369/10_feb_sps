@@ -9,6 +9,10 @@
                 <input type="text" name="search" id="" class="form-control"
                     style="float: right;width: 30%;float: right;" placeholder="Search Member"
                     (keyup)="searchMember($event)">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="isRegistered"  [checked]="getRegistered" (change)="onViewTypeChanged($event)">
+                        <label class="form-check-label" for="isRegistered">{{getRegistered ? 'Registered Only' : 'Unregistered Only'}}</label>
+                      </div>
                 <table class="table table-bordered table-striped table-hover table-responsive" id="tableName"
                     style="width: 100%;">
                     <thead>
@@ -34,8 +38,7 @@
                                     <button type="button" (click)="editMember(m._id)"
                                         class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
                                 </td>
-                                <td>{{m['First Name'] + ' ' + m['Middle Name'] + ' ' + m['Last
-                                    Name']}}</td>
+                                <td>{{m['Full Name']}}</td>
                                 <td class="mobile_no">{{m['Mobile']}}</td>
                                 <td>{{calculateAge(m['Birth Date'])}}</td>
                                 <td>{{m['Gender']}}</td>
@@ -56,6 +59,7 @@
                     </tbody>
                 </table>
                 <jw-pagination [items]="displayList" (changePage)="onChangePage($event)"></jw-pagination>
+                <span>Total {{source?.length || 0}} Records</span>
             </div>
         </div>
     </div>
