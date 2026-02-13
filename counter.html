@@ -70,27 +70,29 @@
     </div>
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script>
-    const countEl = document.getElementById('count');
-    let count = 0;
+    $(function () {
+      var count = 0;
 
-    function updateDisplay() {
-      countEl.textContent = count;
-    }
+      function updateDisplay() {
+        $('#count').text(count);
+      }
 
-    document.getElementById('decrement').addEventListener('click', function () {
-      count--;
-      updateDisplay();
-    });
+      $('#decrement').on('click', function () {
+        count--;
+        updateDisplay();
+      });
 
-    document.getElementById('increment').addEventListener('click', function () {
-      count++;
-      updateDisplay();
-    });
+      $('#increment').on('click', function () {
+        count++;
+        updateDisplay();
+      });
 
-    document.getElementById('reset').addEventListener('click', function () {
-      count = 0;
-      updateDisplay();
+      $('#reset').on('click', function () {
+        count = 0;
+        updateDisplay();
+      });
     });
   </script>
 </body>
