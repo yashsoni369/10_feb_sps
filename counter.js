@@ -1,25 +1,22 @@
-let counter = 0;
+$(document).ready(function() {
+    let counter = 0;
 
-const counterDisplay = document.getElementById('counterDisplay');
-const incrementBtn = document.getElementById('incrementBtn');
-const decrementBtn = document.getElementById('decrementBtn');
-const resetBtn = document.getElementById('resetBtn');
+    function updateDisplay() {
+        $('#counterDisplay').text(counter);
+    }
 
-function updateDisplay() {
-    counterDisplay.textContent = counter;
-}
+    $('#incrementBtn').on('click', function() {
+        counter++;
+        updateDisplay();
+    });
 
-incrementBtn.addEventListener('click', function() {
-    counter++;
-    updateDisplay();
-});
+    $('#decrementBtn').on('click', function() {
+        counter--;
+        updateDisplay();
+    });
 
-decrementBtn.addEventListener('click', function() {
-    counter--;
-    updateDisplay();
-});
-
-resetBtn.addEventListener('click', function() {
-    counter = 0;
-    updateDisplay();
+    $('#resetBtn').on('click', function() {
+        counter = 0;
+        updateDisplay();
+    });
 });
