@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Counter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .counter-container {
+            background: white;
+            padding: 40px 60px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        #counter {
+            font-size: 4rem;
+            color: #667eea;
+            font-weight: bold;
+            margin: 20px 0;
+            min-width: 150px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #increment {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #increment:hover {
+            background-color: #45a049;
+        }
+
+        #decrement {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #decrement:hover {
+            background-color: #da190b;
+        }
+
+        #reset {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        #reset:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <div class="counter-container">
+        <h1>Simple Counter</h1>
+        <div id="counter">0</div>
+        <div class="button-group">
+            <button id="decrement">-</button>
+            <button id="reset">Reset</button>
+            <button id="increment">+</button>
+        </div>
+    </div>
+
+    <script>
+        let count = 0;
+        const counterDisplay = document.getElementById('counter');
+        const incrementBtn = document.getElementById('increment');
+        const decrementBtn = document.getElementById('decrement');
+        const resetBtn = document.getElementById('reset');
+
+        function updateDisplay() {
+            counterDisplay.textContent = count;
+        }
+
+        incrementBtn.addEventListener('click', function() {
+            count++;
+            updateDisplay();
+        });
+
+        decrementBtn.addEventListener('click', function() {
+            count--;
+            updateDisplay();
+        });
+
+        resetBtn.addEventListener('click', function() {
+            count = 0;
+            updateDisplay();
+        });
+    </script>
+</body>
+</html>
