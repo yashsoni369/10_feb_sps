@@ -1,15 +1,9 @@
 // Counter state
 let count = 0;
 
-// Get DOM elements
-const counterDisplay = document.getElementById('counter');
-const incrementBtn = document.getElementById('incrementBtn');
-const decrementBtn = document.getElementById('decrementBtn');
-const resetBtn = document.getElementById('resetBtn');
-
 // Function to update the counter display
 function updateDisplay() {
-    counterDisplay.textContent = count;
+    $('#counter').text(count);
 }
 
 // Increment function
@@ -30,10 +24,13 @@ function reset() {
     updateDisplay();
 }
 
-// Event listeners
-incrementBtn.addEventListener('click', increment);
-decrementBtn.addEventListener('click', decrement);
-resetBtn.addEventListener('click', reset);
+// Document ready
+$(document).ready(function() {
+    // Event listeners
+    $('#incrementBtn').click(increment);
+    $('#decrementBtn').click(decrement);
+    $('#resetBtn').click(reset);
 
-// Initialize display
-updateDisplay();
+    // Initialize display
+    updateDisplay();
+});
