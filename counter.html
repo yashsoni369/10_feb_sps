@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counter</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1a1a2e;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #eee;
+    }
+
+    .counter-container {
+      text-align: center;
+      background: #16213e;
+      padding: 3rem 4rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      color: #a8a8b3;
+    }
+
+    #count {
+      font-size: 5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    button {
+      padding: 0.75rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.2s;
+      color: #fff;
+    }
+
+    button:active { transform: scale(0.95); }
+
+    .btn-decrement { background: #e74c3c; }
+    .btn-reset     { background: #636e72; }
+    .btn-increment { background: #00b894; }
+
+    .positive { color: #00b894; }
+    .negative { color: #e74c3c; }
+    .zero     { color: #eee; }
+  </style>
+</head>
+<body>
+  <div class="counter-container">
+    <h1>Counter</h1>
+    <div id="count" class="zero">0</div>
+    <div class="buttons">
+      <button class="btn-decrement" onclick="update(-1)">- Decrease</button>
+      <button class="btn-reset" onclick="reset()">Reset</button>
+      <button class="btn-increment" onclick="update(1)">+ Increase</button>
+    </div>
+  </div>
+
+  <script>
+    let count = 0;
+    const display = document.getElementById('count');
+
+    function render() {
+      display.textContent = count;
+      display.className = count > 0 ? 'positive' : count < 0 ? 'negative' : 'zero';
+    }
+
+    function update(val) {
+      count += val;
+      render();
+    }
+
+    function reset() {
+      count = 0;
+      render();
+    }
+  </script>
+</body>
+</html>
