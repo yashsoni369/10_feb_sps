@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="360" viewBox="0 0 1000 360">
+<style>text{font-family:Arial,Helvetica,sans-serif;font-size:12px;fill:#222}</style>
+<rect x="0" y="0" width="1000" height="360" fill="white"/>
+<line x1="60" y1="300" x2="940" y2="300" stroke="#ccc"/>
+<line x1="60" y1="60" x2="60" y2="300" stroke="#eee"/>
+<line x1="60" y1="60.0" x2="940" y2="60.0" stroke="#f5f5f5"/>
+<text x="10" y="64.0" fill="#666">190.05</text>
+<line x1="60" y1="120.0" x2="940" y2="120.0" stroke="#f5f5f5"/>
+<text x="10" y="124.0" fill="#666">188.24</text>
+<line x1="60" y1="180.0" x2="940" y2="180.0" stroke="#f5f5f5"/>
+<text x="10" y="184.0" fill="#666">186.43</text>
+<line x1="60" y1="240.0" x2="940" y2="240.0" stroke="#f5f5f5"/>
+<text x="10" y="244.0" fill="#666">184.62</text>
+<line x1="60" y1="300.0" x2="940" y2="300.0" stroke="#f5f5f5"/>
+<text x="10" y="304.0" fill="#666">182.81</text>
+<polyline points="60.0,60.3 280.0,110.1 500.0,60.0 720.0,163.1 940.0,300.0" fill="none" stroke="#1f77b4" stroke-width="2"/>
+<polygon points="60.0,60.3 280.0,110.1 500.0,60.0 720.0,163.1 940.0,300.0 940.0,300.0 60.0,300.0" fill="#1f77b4" opacity="0.08"/>
+<text x="60.0" y="350.0" text-anchor="middle">Feb 09</text>
+<text x="280.0" y="350.0" text-anchor="middle">Feb 10</text>
+<text x="500.0" y="350.0" text-anchor="middle">Feb 11</text>
+<text x="720.0" y="350.0" text-anchor="middle">Feb 12</text>
+<text x="940.0" y="350.0" text-anchor="middle">Feb 13</text>
+<text x="500.0" y="20" text-anchor="middle" font-size="16">NVDA - Last Week Close Price</text>
+</svg>
