@@ -1,0 +1,42 @@
+.card {
+  border: none;
+  border-radius: 10px;
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0 !important;
+  padding: 1rem;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.img-fluid {
+  border: 1px solid #e0e0e0;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+.card.bg-light {
+  border: 1px solid #dee2e6;
+  transition: transform 0.2s;
+}
+
+.card.bg-light:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.display-6 {
+  font-weight: bold;
+}

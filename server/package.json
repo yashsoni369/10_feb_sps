@@ -10,8 +10,12 @@
   "author": "HariPrabodham",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.13.5",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
+    "canvas": "^3.2.1",
+    "chart.js": "^4.5.1",
+    "chartjs-node-canvas": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
