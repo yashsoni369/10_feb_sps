@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A beautifully designed Hello World application with enhanced UX">
+    <title>Hello World - Enhanced UX</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="greeting-wrapper">
+                <h1 class="greeting-text" id="greeting">Hello World!</h1>
+                <div class="wave-emoji">👋</div>
+            </div>
+
+            <p class="subtitle">Welcome to an enhanced user experience</p>
+
+            <div class="interaction-section">
+                <input
+                    type="text"
+                    id="nameInput"
+                    placeholder="Enter your name..."
+                    class="name-input"
+                    aria-label="Name input"
+                >
+                <button id="greetBtn" class="greet-button" aria-label="Personalize greeting">
+                    <span>Greet Me</span>
+                    <span class="button-icon">✨</span>
+                </button>
+            </div>
+
+            <div class="theme-toggle">
+                <button id="themeBtn" class="theme-button" aria-label="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+
+            <div class="features">
+                <div class="feature-item">
+                    <span class="feature-icon">🎨</span>
+                    <span class="feature-text">Modern Design</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚡</span>
+                    <span class="feature-text">Smooth Animations</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📱</span>
+                    <span class="feature-text">Responsive Layout</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
