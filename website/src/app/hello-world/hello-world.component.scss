@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+// ── Variables ──
+$gradient-start: #0f0c29;
+$gradient-mid: #302b63;
+$gradient-end: #24243e;
+$accent-primary: #00d2ff;
+$accent-secondary: #7b2ff7;
+$accent-tertiary: #ff6b6b;
+$card-bg: rgba(255, 255, 255, 0.06);
+$card-border: rgba(255, 255, 255, 0.12);
+$text-primary: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.65);
+
+// ── Container ──
+.hello-world-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, $gradient-start 0%, $gradient-mid 50%, $gradient-end 100%);
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  padding: 2rem 1rem;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ── Floating Particles ──
+.particles-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  bottom: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba($accent-primary, 0.5), rgba($accent-secondary, 0.2));
+  animation: floatUp linear infinite;
+  opacity: 0;
+
+  &:nth-child(odd) {
+    background: radial-gradient(circle, rgba($accent-secondary, 0.5), rgba($accent-tertiary, 0.2));
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+    transform: translateY(-10vh) scale(1);
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-110vh) scale(0.5);
+    opacity: 0;
+  }
+}
+
+// ── Content Card ──
+.content-card {
+  position: relative;
+  z-index: 1;
+  background: $card-bg;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid $card-border;
+  border-radius: 24px;
+  padding: 3rem 3.5rem;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  animation: cardEntry 0.6s ease 0.4s both;
+}
+
+.card-accent {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, $accent-primary, $accent-secondary, transparent);
+  border-radius: 0 0 4px 4px;
+}
+
+@keyframes cardEntry {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// ── Language Badge ──
+.language-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba($accent-primary, 0.12);
+  border: 1px solid rgba($accent-primary, 0.25);
+  border-radius: 50px;
+  padding: 6px 18px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: $accent-primary;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $accent-primary;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+// ── Greeting Text ──
+.greeting-text {
+  font-size: 3rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin: 0 0 1rem;
+  min-height: 4.5rem;
+  line-height: 1.3;
+  background: linear-gradient(135deg, $text-primary 0%, $accent-primary 50%, $accent-secondary 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.cursor {
+  -webkit-text-fill-color: $accent-primary;
+  font-weight: 300;
+  margin-left: 2px;
+
+  &.blink {
+    animation: blink 1s step-end infinite;
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+// ── Subtitle ──
+.subtitle {
+  color: $text-secondary;
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.3px;
+}
+
+// ── Controls ──
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 10px 20px;
+  color: $text-primary;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background: rgba($accent-primary, 0.15);
+    border-color: rgba($accent-primary, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba($accent-primary, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  .arrow {
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+  }
+
+  &.prev-btn:hover .arrow {
+    transform: translateX(-3px);
+  }
+
+  &.next-btn:hover .arrow {
+    transform: translateX(3px);
+  }
+}
+
+// ── Progress Dots ──
+.progress-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.3);
+  }
+
+  &.active {
+    background: $accent-primary;
+    box-shadow: 0 0 8px rgba($accent-primary, 0.6);
+    transform: scale(1.2);
+  }
+}
+
+// ── Counter ──
+.counter {
+  color: $text-secondary;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+// ── Back Link ──
+.back-link {
+  position: relative;
+  z-index: 1;
+  margin-top: 2.5rem;
+  color: $text-secondary;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 8px;
+
+  &:hover {
+    color: $accent-primary;
+    background: rgba($accent-primary, 0.08);
+  }
+}
+
+// ── Responsive ──
+@media (max-width: 640px) {
+  .content-card {
+    padding: 2rem 1.5rem;
+    border-radius: 18px;
+  }
+
+  .greeting-text {
+    font-size: 2rem;
+    min-height: 3.5rem;
+  }
+
+  .controls {
+    gap: 0.8rem;
+  }
+
+  .nav-btn {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+
+    .btn-label {
+      display: none;
+    }
+  }
+
+  .progress-dots {
+    gap: 4px;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 380px) {
+  .greeting-text {
+    font-size: 1.6rem;
+    min-height: 3rem;
+  }
+
+  .content-card {
+    padding: 1.5rem 1rem;
+  }
+}

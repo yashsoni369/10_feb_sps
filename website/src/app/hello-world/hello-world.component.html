@@ -1,0 +1,71 @@
+<div class="hello-world-container" [class.visible]="showContent">
+
+  <!-- Animated background particles -->
+  <div class="particles-layer">
+    <div
+      *ngFor="let p of particles"
+      class="particle"
+      [style.left]="p.left"
+      [style.animationDelay]="p.delay"
+      [style.animationDuration]="p.duration"
+      [style.width]="p.size"
+      [style.height]="p.size">
+    </div>
+  </div>
+
+  <!-- Main content card -->
+  <div class="content-card">
+
+    <!-- Decorative top accent -->
+    <div class="card-accent"></div>
+
+    <!-- Language badge -->
+    <div class="language-badge">
+      <span class="badge-dot"></span>
+      {{ currentLanguage }}
+    </div>
+
+    <!-- Greeting display -->
+    <h1 class="greeting-text">
+      {{ displayText }}<span class="cursor" [class.blink]="!isTyping">|</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="subtitle">
+      A greeting from every corner of the world
+    </p>
+
+    <!-- Navigation controls -->
+    <div class="controls">
+      <button class="nav-btn prev-btn" (click)="prevGreeting()" aria-label="Previous greeting">
+        <span class="arrow">&larr;</span>
+        <span class="btn-label">Prev</span>
+      </button>
+
+      <!-- Progress dots -->
+      <div class="progress-dots">
+        <span
+          *ngFor="let g of greetings; let i = index"
+          class="dot"
+          [class.active]="i === currentIndex"
+          (click)="currentIndex = i; typeGreeting(g)">
+        </span>
+      </div>
+
+      <button class="nav-btn next-btn" (click)="nextGreeting()" aria-label="Next greeting">
+        <span class="btn-label">Next</span>
+        <span class="arrow">&rarr;</span>
+      </button>
+    </div>
+
+    <!-- Counter -->
+    <div class="counter">
+      {{ currentIndex + 1 }} / {{ greetings.length }}
+    </div>
+  </div>
+
+  <!-- Footer link back -->
+  <a routerLink="/register" class="back-link">
+    &larr; Back to Registration
+  </a>
+</div>

@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
+import { HelloWorldComponent } from './hello-world/hello-world.component';
 
 // Ext Modules
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
@@ -15,7 +16,8 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent
+    RegisterComponent,
+    HelloWorldComponent
   ],
   imports: [
     BrowserModule,
