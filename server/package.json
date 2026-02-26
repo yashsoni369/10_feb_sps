@@ -4,7 +4,7 @@
   "description": "Suhradam Parivar Shibir Backend for registeration",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage --forceExit --detectOpenHandles",
     "start": "nodemon server.js"
   },
   "author": "HariPrabodham",
@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "concurrently": "^7.3.0",
+    "jest": "^30.2.0",
     "nodemon": "^2.0.19"
   }
 }

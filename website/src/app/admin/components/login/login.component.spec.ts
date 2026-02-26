@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
@@ -8,9 +7,8 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
-    })
-    .compileComponents();
+      declarations: [LoginComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +19,14 @@ describe('LoginComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should implement OnInit', () => {
+    expect(component.ngOnInit).toBeDefined();
+    expect(typeof component.ngOnInit).toBe('function');
+  });
+
+  it('should use app-login selector', () => {
+    expect(fixture.nativeElement.tagName.toLowerCase()).toBe('app-login');
   });
 });
