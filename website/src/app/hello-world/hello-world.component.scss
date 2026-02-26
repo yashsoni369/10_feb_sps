@@ -1,0 +1,64 @@
+:host {
+  display: block;
+}
+
+.hello {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  background: linear-gradient(135deg, #1d4ed8, #9333ea);
+  color: #f8fafc;
+}
+
+.hello__card {
+  background: rgba(15, 23, 42, 0.75);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.4);
+  text-align: center;
+  backdrop-filter: blur(12px);
+}
+
+.hello__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(248, 250, 252, 0.2);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin: 0 0 1rem;
+}
+
+p {
+  font-size: 1.1rem;
+  margin: 0 0 2rem;
+  color: rgba(248, 250, 252, 0.85);
+}
+
+.hello__cta {
+  border: none;
+  background: #f8fafc;
+  color: #1e293b;
+  font-weight: 600;
+  padding: 0.75rem 1.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hello__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px -12px rgba(15, 23, 42, 0.6);
+}
