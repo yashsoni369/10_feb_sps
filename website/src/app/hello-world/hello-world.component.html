@@ -1,0 +1,31 @@
+<div class="hello-world-container" [class.visible]="isVisible">
+
+  <!-- Floating decorative orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="content-card">
+    <div class="badge-pill">
+      <span class="dot"></span>
+      {{ currentLang }}
+    </div>
+
+    <h1 class="greeting-text">{{ greeting }}</h1>
+
+    <p class="subtitle">{{ subtitle }}</p>
+
+    <button class="btn-hello" (click)="cycleGreeting()">
+      Say Hello in Another Language
+    </button>
+
+    <p class="click-counter" *ngIf="clickCount > 0">
+      You've explored <strong>{{ clickCount }}</strong> greeting{{ clickCount > 1 ? 's' : '' }}
+    </p>
+  </div>
+
+  <footer class="hello-footer">
+    Built with Angular &middot; Simple Hello World
+  </footer>
+
+</div>

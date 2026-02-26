@@ -1,0 +1,208 @@
+// ── Variables ──
+$gradient-start: #667eea;
+$gradient-end: #764ba2;
+$card-bg: rgba(255, 255, 255, 0.12);
+$card-border: rgba(255, 255, 255, 0.2);
+$text-primary: #ffffff;
+$text-muted: rgba(255, 255, 255, 0.7);
+$btn-bg: rgba(255, 255, 255, 0.2);
+$btn-hover-bg: rgba(255, 255, 255, 0.35);
+
+// ── Container ──
+.hello-world-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, $gradient-start 0%, $gradient-end 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ── Floating Orbs ──
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.orb-1 {
+  width: 300px;
+  height: 300px;
+  top: -80px;
+  left: -80px;
+  animation: float 8s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 200px;
+  height: 200px;
+  bottom: -60px;
+  right: -40px;
+  animation: float 6s ease-in-out infinite reverse;
+}
+
+.orb-3 {
+  width: 150px;
+  height: 150px;
+  top: 40%;
+  right: 15%;
+  animation: float 10s ease-in-out infinite 2s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-30px) scale(1.05);
+  }
+}
+
+// ── Content Card ──
+.content-card {
+  background: $card-bg;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid $card-border;
+  border-radius: 24px;
+  padding: 3rem 4rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+// ── Language Badge ──
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  color: $text-primary;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    display: inline-block;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
+// ── Typography ──
+.greeting-text {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+  transition: all 0.4s ease;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: $text-muted;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+// ── Button ──
+.btn-hello {
+  background: $btn-bg;
+  color: $text-primary;
+  border: 1px solid $card-border;
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+
+  &:hover {
+    background: $btn-hover-bg;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// ── Click Counter ──
+.click-counter {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: $text-muted;
+
+  strong {
+    color: $text-primary;
+    font-weight: 600;
+  }
+}
+
+// ── Footer ──
+.hello-footer {
+  position: absolute;
+  bottom: 1.5rem;
+  font-size: 0.8rem;
+  color: $text-muted;
+  letter-spacing: 0.5px;
+}
+
+// ── Responsive ──
+@media (max-width: 576px) {
+  .content-card {
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+  }
+
+  .greeting-text {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .btn-hello {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+}
