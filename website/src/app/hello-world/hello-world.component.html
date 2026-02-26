@@ -1,0 +1,37 @@
+<div class="hello-world-container">
+  <div class="card">
+    <div class="card-header">
+      <h1 class="animated-title">{{ title }}</h1>
+      <p class="subtitle">{{ subtitle }}</p>
+    </div>
+
+    <div class="card-body">
+      <div class="time-display">
+        <i class="fa fa-clock-o"></i>
+        <span>{{ currentTime | date: 'medium' }}</span>
+      </div>
+
+      <div class="action-section">
+        <button class="btn btn-primary btn-lg" (click)="refreshMessage()">
+          <i class="fa fa-refresh"></i> Refresh Message
+        </button>
+
+        <div class="navigation-links">
+          <a routerLink="/register" class="btn btn-success">
+            <i class="fa fa-edit"></i> Go to Registration
+          </a>
+          <a routerLink="/admin" class="btn btn-info">
+            <i class="fa fa-user"></i> Admin Panel
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <p class="footer-text">
+        <i class="fa fa-heart text-danger"></i>
+        Built with Angular
+      </p>
+    </div>
+  </div>
+</div>
