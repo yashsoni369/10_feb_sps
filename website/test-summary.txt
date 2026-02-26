@@ -1,0 +1,29 @@
+Test Files Created:
+===================
+
+1. src/app/services/admin.service.spec.ts (5167 bytes)
+   - Tests AdminService HTTP methods
+   - 12 test cases covering:
+     * Service initialization
+     * getAll() with registered/unregistered filters
+     * deRegisterMember() POST request
+     * updateSeva() PUT request
+     * dashMandalWise() dashboard data
+     * dashMandalBus() dashboard data
+     * HTTP error handling
+
+2. src/app/services/excel.service.spec.ts (5705 bytes)
+   - Tests ExcelService export functionality
+   - 11 test cases covering:
+     * Service initialization
+     * exportAsExcelFile() with various data types
+     * Workbook creation with correct sheet names
+     * Empty array handling
+     * Timestamp generation in filenames
+     * Blob creation with correct MIME type
+     * Complex nested JSON data
+     * Special characters in filenames
+     * Large dataset export (1000 records)
+     * XLSX library integration
+
+TypeScript Compilation: PASSED ✓
