@@ -1,0 +1,14 @@
+<main class="hello">
+  <section class="hello__card">
+    <p class="hello__eyebrow">Starter page</p>
+    <h1>{{ title }}</h1>
+    <p class="hello__subtitle">{{ subtitle }}</p>
+    <ul class="hello__list">
+      <li *ngFor="let item of highlights">{{ item }}</li>
+    </ul>
+    <div class="hello__actions">
+      <a class="hello__button" routerLink="/register">Go to registration</a>
+      <a class="hello__link" routerLink="/admin">Admin area</a>
+    </div>
+  </section>
+</main>
