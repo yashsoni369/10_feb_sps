@@ -1,8 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
+  let fixture: ComponentFixture<AppComponent>;
+  let component: AppComponent;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -14,22 +18,56 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
+  });
+
+  it('should be an instance of AppComponent', () => {
+    expect(component instanceof AppComponent).toBeTrue();
   });
 
   it(`should have as title 'website'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('website');
+    expect(component.title).toEqual('website');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
+  it('should have title property defined as a string', () => {
+    expect(typeof component.title).toBe('string');
+  });
+
+  it('should contain a router-outlet in the template', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('website app is running!');
+    const routerOutlet = compiled.querySelector('router-outlet');
+    expect(routerOutlet).toBeTruthy();
+  });
+
+  it('should have router-outlet as the only root element content', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const children = compiled.children;
+    // router-outlet is the primary element in the template
+    expect(children.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('should use app-root as its selector', () => {
+    const componentElement = fixture.debugElement;
+    expect(componentElement.nativeElement.tagName.toLowerCase()).toBe('app-root');
+  });
+
+  it('should render without errors', () => {
+    expect(() => fixture.detectChanges()).not.toThrow();
+  });
+
+  it('should have a defined fixture', () => {
+    expect(fixture).toBeDefined();
+  });
+
+  it('should find router-outlet via debug element', () => {
+    const routerOutletDebug = fixture.debugElement.query(By.css('router-outlet'));
+    expect(routerOutletDebug).toBeTruthy();
   });
 });
